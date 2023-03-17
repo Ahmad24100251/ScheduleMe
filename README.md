@@ -4,5 +4,5 @@
 - Wajeeh Azeem
 - Muhammad Jafri
 - Waleed Ali
-- Ahmed Aftab
+- Ahmad Aftab
 - Haleem Khan
