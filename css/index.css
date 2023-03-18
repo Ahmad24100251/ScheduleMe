@@ -1,8 +1,5 @@
-.homePage{
-    position: relative;
-    width: 1440px;
-    height: 1024px;
-    background: rgba(80, 69, 69, 0.92);
+body{
+    background-color:#141414;
 }
 #paragrapgh
 {
