@@ -1,20 +1,26 @@
-const express = require("express")
-const app = express()
-const path = require("path")
-const mongoose = require("mongoose")
-const bodyParser = require("body-parser")
-const urlDB = "mongodb://localhost:27017/testdb"
+const express = require("express");
+const app = express();
+const path = require("path");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const urlDB = "mongodb://localhost:27017/testdb";
 
 // Connect to the MongoDB database
-mongoose.connect(urlDB, { useNewUrlParser: true, useUnifiedTopology: true })
-const db = mongoose.connection
-db.on('error', console.error.bind(console, 'MongoDB connection error:'))
+mongoose.connect(urlDB, { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', function() {
-  console.log("Connected to the database")
-})
+  console.log("Connected to the database");
+});
 
-const indexHtmlPath = path.join(__dirname, "..")
-app.use(bodyParser.urlencoded({ extended: true }))
+const indexHtmlPath = path.join(__dirname, "..");
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+  secret: "secret-key",
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(express.static(indexHtmlPath + '/css'));
 app.use(express.static(indexHtmlPath + '/html'));
 app.use(express.static(indexHtmlPath + '/js'));
@@ -26,10 +32,13 @@ app.use(signupRouter);
 const loginRouter = require("./login");
 app.use(loginRouter);
 
+const changePasswordRouter = require("./changePassword");
+app.use(changePasswordRouter);
+
 app.get("/", (req, res) => {
-  res.sendFile(indexHtmlPath + "/html/index.html")
-})
+  res.sendFile(indexHtmlPath + "/html/index.html");
+});
 
 app.listen(3000, () => {
-  console.log("Server started on 3000")
-})
+  console.log("Server started on 3000");
+});
