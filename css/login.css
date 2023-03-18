@@ -22,8 +22,8 @@ body {
     align-items: center;
     height: 10vh;
     background-color: #525050;
-  }
-  
+}
+
 .header h1 {
     font-size: 2.5rem;
     font-weight: 800;
@@ -116,4 +116,26 @@ button[type="submit"]:hover {
 .forgot-password:hover {
     text-decoration: underline;
     color: #6c6c6c;
+}
+
+
+.login-form button {
+    display: inline-block;
+    margin-left: 10px;
+  }
+  button[type="button"] {
+    background-color: #525050;
+    color: #fff;
+    border: none;
+    border-radius: 38px;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    margin-top: 1rem;
+}
+
+button[type="button"]:hover {
+    background-color: #6c6c6c;
 }
