@@ -1,14 +1,21 @@
+<!-- Design: Haleem Khan
+Backend: Wajeeh -->
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="/css/login.css">
     <title>Login</title>
 </head>
+
 <body>
-    <div class = "MainPage">
+    <div class="MainPage">
+
+
         <div class="navType">
             <p>Welcome Back to ScheduleMe</p>
         </div>
@@ -16,33 +23,24 @@
         <div class="subMainPage">
 
             <div class="subSub">
-               <p>Login Required</p> 
+                <p>Login Required</p>
             </div>
 
             <div class="subSecondHalf">
 
-                <form action=""> 
+                <form action="#" method="POST">
+                    <label id="nameLabel" for="name">name</label>
+                    <input type="text" name="name" id="name" placeholder="name">
+                    <label id="passwordLabel" for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Password">
+                    <input class="submit" type="submit" value="Login">
 
 
-                        <label id = "usernameLabel" for="username">Username</label>
-                        <input type="text" name="username" id="username" placeholder="Username">
-
-
-                         <label id = "passwordLabel" for="password">Password</label>
-                        <input type="password" name="password" id="password" placeholder="Password"> 
-
-                        <a href="/forgotpassword.html"class="forgotPassordLink">Forgot your password?</a>
-                        
-
-                    <!-- <div class="submit"> -->
-                           
-                     <input class= "submit" type="submit" value="Login">
-                    <!-- </div>  -->
-
-                </form> 
+                </form>
             </div>
 
         </div>
     </div>
 </body>
+
 </html>
