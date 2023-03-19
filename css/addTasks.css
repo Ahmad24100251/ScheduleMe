@@ -40,9 +40,7 @@ a:hover {
 
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+input[type="text"] {
   font-size: 15px;
   width: 70%;
   padding:  10px 30px;
