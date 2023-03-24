@@ -110,6 +110,22 @@ Backend: Wajeeh-->
     </tr>
   </table>
   <script>
+    $(document).ready(function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+
+      $.ajax({
+        url: `/getMostRecentGratitude?username=${username}`,
+        type: 'GET',
+        success: function (result) {
+          $('#gratitudeCell').text(result);
+        },
+        error: function (error) {
+          console.error(error);
+        }
+      });
+    });
+
     function redirectToTasks() {
       const urlParams = new URLSearchParams(window.location.search);
       const username = urlParams.get('username');
@@ -120,5 +136,6 @@ Backend: Wajeeh-->
       const username = urlParams.get('username');
       window.location.href = `/addGratitude.html?username=${username}`;
     }
-    </script>
+  </script>
+
 </html>
