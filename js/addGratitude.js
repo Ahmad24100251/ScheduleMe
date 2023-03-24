@@ -13,7 +13,7 @@ router.post("/addGratitude.html", async (req, res) => {
     });
 
     await gratitude.save();
-    res.redirect(`/welcomeUser.html?username=${username}`);
+    res.redirect(`/dailyplanner.html?username=${username}`);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error");
