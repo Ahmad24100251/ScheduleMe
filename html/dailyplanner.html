@@ -9,6 +9,8 @@ Backend: Wajeeh-->
   <meta charset="UTF-8">
   <title>Daily Planner</title>
   <link rel="stylesheet" href="css/dailyplanner.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -18,12 +20,13 @@ Backend: Wajeeh-->
       <th>Time</th>
       <th>Tasks<button onclick="redirectToTasks()">+</button></th>
       <th>Reminders</th>
-      <th>Gratitude Journal<button>+</button></th>
+      <th>Gratitude Journal<button onclick="redirectToGratitude()">+</button></th>
     </tr>
     <tr>
       <td>6:00 AM</td>
       <td></td>
       <td></td>
+      <td id="gratitudeCell"></td>
     </tr>
     <tr>
       <td>7:00 AM</td>
@@ -111,6 +114,11 @@ Backend: Wajeeh-->
       const urlParams = new URLSearchParams(window.location.search);
       const username = urlParams.get('username');
       window.location.href = `/addTasks.html?username=${username}`;
+    }
+    function redirectToGratitude() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      window.location.href = `/addGratitude.html?username=${username}`;
     }
     </script>
 </html>
