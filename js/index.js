@@ -4,7 +4,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
-const urlDB = "mongodb://localhost:27017/testdb";
+const urlDB = "mongodb://127.0.0.1:27017/testdb";
 
 // Connect to the MongoDB database
 mongoose.connect(urlDB, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -21,6 +21,14 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+
+app.post('/login', (req, res) => {
+  const { username } = req.body;
+  req.session.username = username;
+  res.redirect('/welcomeUser.html');
+});
+
+
 app.use(express.static(indexHtmlPath + '/css'));
 app.use(express.static(indexHtmlPath + '/html'));
 app.use(express.static(indexHtmlPath + '/js'));
@@ -34,6 +42,10 @@ app.use(loginRouter);
 
 const changePasswordRouter = require("./changePassword");
 app.use(changePasswordRouter);
+const addGratitudeRouter = require("./addGratitude");
+app.use(addGratitudeRouter);
+const getMostRecentGratitude = require("./getMostRecentGratitude");
+app.use(getMostRecentGratitude);
 
 app.get("/", (req, res) => {
   res.sendFile(indexHtmlPath + "/html/index.html");
