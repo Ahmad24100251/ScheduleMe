@@ -10,7 +10,7 @@ const urlDB = "mongodb://127.0.0.1:27017/testdb";
 mongoose.connect(urlDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', function() {
+db.once('open', function () {
   console.log("Connected to the database");
 });
 
@@ -46,7 +46,10 @@ const addGratitudeRouter = require("./addGratitude");
 app.use(addGratitudeRouter);
 const getMostRecentGratitude = require("./getMostRecentGratitude");
 app.use(getMostRecentGratitude);
-
+const addTasks = require("./addTasks");
+app.use(addTasks);
+const getTasks = require("./getTasks");
+app.use(getTasks);
 app.get("/", (req, res) => {
   res.sendFile(indexHtmlPath + "/html/index.html");
 });
