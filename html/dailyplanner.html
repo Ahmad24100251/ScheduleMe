@@ -1,7 +1,3 @@
-<!--Design: Usaid, Jafri
-Backend: Wajeeh-->
-
-
 <!DOCTYPE html>
 <html>
 
@@ -24,101 +20,129 @@ Backend: Wajeeh-->
     </tr>
     <tr>
       <td>6:00 AM</td>
+      <td id="taskCell1" class="taskcell"></td>
       <td></td>
-      <td></td>
-      <td id="gratitudeCell"></td>
+      <td id="gratitudeCell" class="gratitudecell"></td>
     </tr>
     <tr>
       <td>7:00 AM</td>
-      <td></td>
+      <td id="taskCell2" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>8:00 AM</td>
-      <td></td>
+      <td id="taskCell3" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>9:00 AM</td>
-      <td></td>
+      <td id="taskCell4" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>10:00 AM</td>
-      <td></td>
+      <td id="taskCell5" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>11:00 AM</td>
-      <td></td>
+      <td id="taskCell6" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>12:00 PM</td>
-      <td></td>
+      <td id="taskCell7" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>1:00 PM</td>
-      <td></td>
+      <td id="taskCell8" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>2:00 PM</td>
-      <td></td>
+      <td id="taskCell9" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>3:00 PM</td>
-      <td></td>
+      <td id="taskCell10" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>4:00 PM</td>
-      <td></td>
+      <td id="taskCell11" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>5:00 PM</td>
-      <td></td>
+      <td id="taskCell12" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>6:00 PM</td>
-      <td></td>
+      <td id="taskCell13" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>7:00 PM</td>
-      <td></td>
+      <td id="taskCell14" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>8:00 PM</td>
-      <td></td>
+      <td id="taskCell15" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>9:00 PM</td>
-      <td></td>
+      <td id="taskCell16" class="taskcell"></td>
       <td></td>
     </tr>
     <tr>
       <td>10:00 PM</td>
-      <td></td>
+      <td id="taskCell17" class="taskcell"></td>
       <td></td>
     </tr>
   </table>
   <script>
-    function redirectToTasks() {
+    $(document).ready(function () {
       const urlParams = new URLSearchParams(window.location.search);
       const username = urlParams.get('username');
-      window.location.href = `/addTasks.html?username=${username}`;
+      $.ajax({
+    url: `/getMostRecentGratitude?username=${username}`,
+    type: 'GET',
+    success: function (result) {
+      $('#gratitudeCell').text(result);
+    },
+    error: function (error) {
+      console.error(error);
     }
-    function redirectToGratitude() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const username = urlParams.get('username');
-      window.location.href = `/addGratitude.html?username=${username}`;
+  });
+
+  $.ajax({
+    url: `/getTasks?username=${username}`,
+    type: 'GET',
+    success: function (result) {
+      for (let i = 0; i < result.length; i++) {
+        $(`#taskCell${i+1}`).text(result[i].task);
+      }
+    },
+    error: function (error) {
+      console.error(error);
     }
-    </script>
+  });
+});
+
+function redirectToTasks() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const username = urlParams.get('username');
+  window.location.href = `/addTasks.html?username=${username}`;
+}
+function redirectToGratitude() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const username = urlParams.get('username');
+  window.location.href = `/addGratitude.html?username=${username}`;
+}
+</script>
 </html>
