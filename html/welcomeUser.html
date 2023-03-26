@@ -1,0 +1,49 @@
+<!-- Contributor: Waleed Ali -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/welcomeUser.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+  <title>Welcome</title>
+</head>
+
+<body>
+  <div class="Welcome">
+    <h1>Welcome, <span id="username"></span></h1>
+    <button class="button-changePW" id="change-password" onclick="redirectToChangePassword()">Change password</button>
+    <button class="button-logout" id="logout" >Logout</button>
+  </div>
+  <div class="border"></div>
+  <div class="buttons">
+    <button class="button" id="daily-planner" onclick="redirectToPlanner()">Daily Planner</button>
+    <button class="button" id="fitness-tracker">Fitness Tracker</button>
+    <button class="button" id="finance-tracker">Finance Tracker</button>
+  </div>
+  <div class="motivationalQuotes">
+    <h2>Science is the man, i love cats ty so much just testing the milits ummm how much kongerssw</h2>
+  </div>
+  <script>
+    // Extract the username from the URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username');
+
+    // Update the username in the h1 tag
+    document.getElementById('username').textContent = username;
+    function redirectToChangePassword() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      window.location.href = `/html/changePassword.html?username=${username}`;
+    }
+    function redirectToPlanner() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      window.location.href = `/dailyplanner.html?username=${username}`;
+    }
+  </script>
+</body>
+
+</html>
