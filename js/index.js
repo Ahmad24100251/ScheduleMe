@@ -50,6 +50,11 @@ const addTasks = require("./addTasks");
 app.use(addTasks);
 const getTasks = require("./getTasks");
 app.use(getTasks);
+
+
+const delTasks = require("./deleteTasks");
+app.use(delTasks);
+
 app.get("/", (req, res) => {
   res.sendFile(indexHtmlPath + "/html/index.html");
 });
