@@ -1,80 +1,69 @@
-body{
-    background-color:#141414;
+@import url("https://fonts.googleapis.com/css?family=PT+Sans");
+
+body {
+  background-color: #141414;
+  font-family: "PT Sans", sans-serif;
 }
-.Welcome{
-    width: 100%;
-    text-align: center;
-    color:white;
-    font-family: 'Poppins',sans-serif;
-    font-style: normal;
-    font-size: 20px;
-    font-weight: 800;
+
+.Welcome {
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-style: normal;
+  font-size: 20px;
+  font-weight: 800;
 }
-.border{
-    background-color: #2D2D2D;
-    width: 100%;
-    overflow: hidden;
-    height : 4px;
+
+.border {
+  background-color: #2D2D2D;
+  width: 100%;
+  overflow: hidden;
+  height: 4px;
 }
+
+a {
+  color: #333;
+  font-style: normal;
+}
+
 .button{
-    border-radius: 6px;
-    border: none;
-    background-color: #525050;
-    color:white;
-    font-family: 'Poppins',sans-serif;
-    font-size: 13px;
-    height: 30px;
-    width:123px;
-
-}
-.buttons{
-    position: relative;
-    display:flex;
-    justify-content: space-evenly;
-    top:100px;
-    align-items: center;
+  border-radius: 6px;
+  border: none;
+  background-color: #525050;
+  color:white;
+  font-size: 13px;
+  height: 30px;
+  width:123px;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.button-changePW{
-    position: absolute;
-    top:47px;
-    right:10px;
-    border-radius: 6px;
-    border: none;
-    background-color: #525050;
-    color:white;
-    font-family: 'Poppins',sans-serif;
-    font-size: 11px;
-    height: 24px;
-    width:116px; 
+.button:hover {
+  background-color: #7c7c7c;
 }
 
-.button-logout{
-    position: absolute;
-    top:47px;
-    left:10px;
-    border-radius: 6px;
-    border: none;
-    background-color: #525050;
-    color:white;
-    font-family: 'Poppins',sans-serif;
-    font-size: 11px;
-    height: 24px;
-    width:116px; 
+
+.buttons {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  top: 100px;
+  align-items: center;
 }
 
-.motivationalQuotes{
-    position:absolute;
-    top:396px;
-    left:20%;
-    width:60%;
-    height: 100vh;
-    font-family: 'Poppins',sans-serif;
-    text-align: center;
-    color:white;
-    max-width: 100%;
-    word-wrap: break-word;
-    margin: 0 auto; 
-
+.button-changePW {
+  position: absolute;
+  top: 45px;
+  right: 15px;
+  border-radius: 6px;
+  border: none;
+  background-color: #525050;
+  color:white;
+  font-size: 13px;
+  height: 30px;
+  width:123px;
+  transition: background-color 0.3s ease-in-out;
 }
-
+  
+.button-changePW:hover {
+  background-color: #7c7c7c;
+}
