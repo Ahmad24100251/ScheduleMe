@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/welcomeUser.css">
+  <link rel="stylesheet" href="css/welcomeUser.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet">
   <title>Welcome</title>
 </head>
@@ -14,59 +14,22 @@
 <body>
   <div class="Welcome">
     <h1>Welcome, <span id="username"></span></h1>
-    <button class="button-changePW" id="change-password" onclick="redirectToChangePassword()">Change password</button>
-    <button class="button-logout" id="logout" onclick="redirectToLogin()">Logout</button>
+    <button class="button-changePW"><a href="/html/changePassword.html">Change password</a></button>
   </div>
   <div class="border"></div>
   <div class="buttons">
-    <button class="button" id="daily-planner" onclick="redirectToPlanner()">Daily Planner</button>
+    <button class="button" id="daily-planner"><a href="dailyplanner.html">Daily Planner</a></button>
     <button class="button" id="fitness-tracker">Fitness Tracker</button>
     <button class="button" id="finance-tracker">Finance Tracker</button>
   </div>
-  <div class="motivationalQuotes">
-  </div>
+
   <script>
     // Extract the username from the URL parameter
-
     const urlParams = new URLSearchParams(window.location.search);
     const username = urlParams.get('username');
-    
+
     // Update the username in the h1 tag
     document.getElementById('username').textContent = username;
-
-
-
-    fetch('./quotes.txt')
-  .then(response => response.text())
-  .then(text => {
-    // Split the file contents into an array of lines
-    const quotes = text.split('\n');
-    
-    // Select a random quote from the array
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    const randomQuote = quotes[randomIndex];
-    
-    // Display the quote in the "motivationalQuotes" div
-    const div = document.querySelector('.motivationalQuotes');
-    console.log(randomQuote)
-    div.textContent = randomQuote;
-  });
-
-    function redirectToChangePassword() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const username = urlParams.get('username');
-      window.location.href = `/changePassword.html?username=${username}`;
-    }
-    function redirectToLogin() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const username = urlParams.get('username');
-      window.location.href = `/login.html`;
-    }
-    function redirectToPlanner() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const username = urlParams.get('username');
-      window.location.href = `/dailyplanner.html?username=${username}`;
-    }
   </script>
 </body>
 

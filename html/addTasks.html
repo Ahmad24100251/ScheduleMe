@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href = "/css/addTasks.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <link rel = "stylesheet" href = "css/addTasks.css">
     <title>add-tasks</title>
 </head>
 <body>
@@ -14,16 +13,13 @@
         <h1>Enter Task</h1>
         <form action="#" method="POST">
           <div class="form-group">
-            <label for="task">Enter Task:</label>
-            <input type="text" id="task" name="task" placeholder="Enter Task name " style="width:70%"required>
+            <input type="text" id="task" name="task" placeholder="Enter Task name " required>
           </div>
           <div class="form-group">
-            <label for="priority">Enter Priority:</label>
-            <input type="text" id="priority" name="priority"placeholder="Enter priority between 1 and 3" style="width:70%"required>
+            <input type="text" id="priority" name="task" placeholder="Enter priority between 1 and 3" required>
           </div>
           <div class="form-group">
-            <label for="hours">Enter Task length(Hours):</label>
-            <input type="number" id="hours"placeholder= "hours" name="hours" style="width: 60px" required>
+            <input type="number" id="hours" placeholder= "Enter Task length in hours" name="hours" required>
           </div>
           <button type="submit" class="btn">Add</button>
         </form>
