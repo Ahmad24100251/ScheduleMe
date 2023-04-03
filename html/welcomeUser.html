@@ -19,8 +19,7 @@
   </div>
   <div class="border"></div>
   <div class="buttons">
-    <button class="button" id="daily-planner"><a href="dailyplanner.html" style="text-decoration: none
-    ; color: white;">Daily Planner</a></button>
+    <button class="button" id="daily-planner" onclick="redirectToPlanner()">Daily Planner</button>
     <button class="button" id="fitness-tracker">Fitness Tracker</button>
     <button class="button" id="finance-tracker">Finance Tracker</button>
   </div>
@@ -62,6 +61,7 @@
     function redirectToPlanner() {
       const urlParams = new URLSearchParams(window.location.search);
       const username = urlParams.get('username');
+      console.log(username)
       window.location.href = `/dailyplanner.html?username=${username}`;
     }
     // Update the username in the h1 tag
