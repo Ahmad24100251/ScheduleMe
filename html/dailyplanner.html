@@ -124,26 +124,30 @@
         url: `/getTasks?username=${username}`,
         type: 'GET',
         success: function (result) {
+          let whereAt = 1;
           for (let i = 0; i < result.length; i++) {
             const task = result[i];
             const taskHours = task.hours;
             const taskStart = new Date(task.startAt).getHours();
             const taskEnd = new Date(task.endAt).getHours();
 
-            for (let j = taskStart; j < taskEnd; j++) {
-              const taskCell = $(`#taskCell${j - 10}`).text(task.task);
-              if (j === taskStart) {
+            for (let j = whereAt; j < whereAt + taskHours && j <= 17; j++) {
+              const taskCell = $(`#taskCell${j}`);
+              if (j === whereAt) { // this is the starting cell of the task
                 taskCell.attr('rowspan', taskHours);
-              } else {
-                taskCell.hide();
+                taskCell.text(task.task);
+              } else { // not the starting cell
+                taskCell.remove(); // remove the cell since it's not needed anymore
               }
             }
+            whereAt = whereAt + taskHours
           }
         },
         error: function (error) {
           console.error(error);
         }
       });
+
 
     });
 
