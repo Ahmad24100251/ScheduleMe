@@ -15,7 +15,7 @@
   <div class="Welcome">
     <h1>Welcome, <span id="username"></span></h1>
     <button class="button-changePW" id="change-password" onclick="redirectToChangePassword()">Change password</button>
-    <button class="button-logout" id="logout" onclick="redirectToLogin()">Logout</button>
+    <button class="button-logout" id="logout" onclick="redirectToIndex()">Logout</button>
   </div>
   <div class="border"></div>
   <div class="buttons">
@@ -54,10 +54,10 @@
       const username = urlParams.get('username');
       window.location.href = `/changePassword.html?username=${username}`;
     }
-    function redirectToLogin() {
+    function redirectToIndex() {
       const urlParams = new URLSearchParams(window.location.search);
       const username = urlParams.get('username');
-      window.location.href = `/login.html`;
+      window.location.href = `/index.html`;
     }
     function redirectToPlanner() {
       const urlParams = new URLSearchParams(window.location.search);
