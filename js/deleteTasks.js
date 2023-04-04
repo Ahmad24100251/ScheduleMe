@@ -12,7 +12,7 @@ cron.schedule('00 22 * * *', async () => { // 3:49PM is represented as 15:49 in 
     const cutoffDate = new Date(Date.now() - (24 * 60 * 60 * 1000)); // Delete tasks older than 24 hours
     await Task.deleteMany({ startAt: { $lt: cutoffDate } });
 
-    console.log('All tasks deleted at 3:49 PM');
+    console.log('All tasks deleted at 10:00 PM');
   } catch (error) {
     console.error(error);
   }
