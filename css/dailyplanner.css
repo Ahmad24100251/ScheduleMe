@@ -43,3 +43,6 @@ th {
   width: 30%;
 }
     
+input[type="checkbox"] {
+  float: right;
+}
