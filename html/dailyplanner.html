@@ -119,6 +119,27 @@
           console.error(error);
         }
       });
+      // Add event listener to all checkboxes with id starting with 'checkbox'
+      $(document).on('change', 'input[id^="checkbox"]', function () {
+        const checkboxId = $(this).attr('id');
+        const taskCell = $(this).closest('.taskcell');
+        const taskName = taskCell.text().trim();
+
+        if ($(this).is(':checked')) {
+          // Checkbox is checked, remove it and cross out the task name
+          $(this).remove();
+          taskCell.addClass('task-completed');
+          taskCell.html(`<s>${taskName}</s>`);
+        } else {
+          // Checkbox is unchecked, restore the task name and add the checkbox back
+          taskCell.removeClass('task-completed');
+          taskCell.html(taskName);
+          const checkbox = $('<input type="checkbox">');
+          checkbox.attr('id', checkboxId);
+          taskCell.prepend(checkbox);
+        }
+      });
+
 
       $.ajax({
         url: `/getTasks?username=${username}`,
@@ -134,8 +155,13 @@
             for (let j = whereAt; j < whereAt + taskHours && j <= 17; j++) {
               const taskCell = $(`#taskCell${j}`);
               if (j === whereAt) { // this is the starting cell of the task
+                const checkbox = $('<input type="checkbox">');
+                checkbox.attr('id', `checkbox${i}`);
+                taskCell.append(checkbox);
+                taskCell.append(task.task);
+                taskCell.addClass('task-added');
                 taskCell.attr('rowspan', taskHours);
-                taskCell.text(task.task);
+                // taskCell.text(task.task);
               } else { // not the starting cell
                 taskCell.remove(); // remove the cell since it's not needed anymore
               }
