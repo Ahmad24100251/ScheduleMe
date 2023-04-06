@@ -50,7 +50,8 @@ const addTasks = require("./addTasks");
 app.use(addTasks);
 const getTasks = require("./getTasks");
 app.use(getTasks);
-
+const getReminders = require("./getReminders");
+app.use(getReminders)
 
 const delTasks = require("./deleteTasks");
 app.use(delTasks);
