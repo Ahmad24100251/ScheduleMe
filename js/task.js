@@ -28,6 +28,10 @@ const taskSchema = new mongoose.Schema({
   endAt: {
     type: Date,
     required: true
+  },
+  lastReminderSent: {
+    type: Date,
+    default: null
   }
 }, {
   timestamps: true
