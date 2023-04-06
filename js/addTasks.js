@@ -15,7 +15,12 @@ router.post("/addTasks.html", async (req, res) => {
       return res.status(400).send("Task limit reached");
     }
     // calculate the start and end times for the new task
-    const startAt = taskCount === 0 ? new Date('2023-04-01T06:00:00.000Z') : (await Task.findOne({ username: username, taskNumber: taskCount })).endAt;
+    const currentDate = new Date().toLocaleString("en-US", { timeZone: "Asia/Karachi" });
+    const currentYear = new Date(currentDate).getUTCFullYear();
+    const currentMonth = (`0${new Date(currentDate).getUTCMonth() + 1}`).slice(-2);
+    const currentDay = (`0${new Date(currentDate).getUTCDate()}`).slice(-2);
+    const startAt = taskCount === 0 ? new Date(`${currentYear}-${currentMonth}-${currentDay}T06:00:00.000Z`) : (await Task.findOne({ username: username, taskNumber: taskCount })).endAt;
+ 
     const endAt = new Date(startAt.getTime() + hours * 60 * 60 * 1000);
     const taskNumber = taskCount + 1; // increment the task count to get the new task number
     const task = new Task({
@@ -36,6 +41,5 @@ router.post("/addTasks.html", async (req, res) => {
     res.status(500).send("Internal server error");
   }
 });
-
 
 module.exports = router;
