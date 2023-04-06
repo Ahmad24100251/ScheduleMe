@@ -18,91 +18,96 @@
       <th>Reminders</th>
       <th>Gratitude Journal<button onclick="redirectToGratitude()">+</button></th>
     </tr>
-    <tr>
+   <tr>
       <td>6:00 AM</td>
       <td id="taskCell1" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell1" class="remindercell"></td>
       <td id="gratitudeCell" class="gratitudecell"></td>
     </tr>
     <tr>
       <td>7:00 AM</td>
       <td id="taskCell2" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell2" class="remindercell"></td>
     </tr>
     <tr>
       <td>8:00 AM</td>
       <td id="taskCell3" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell3" class="remindercell"></td>
     </tr>
     <tr>
       <td>9:00 AM</td>
       <td id="taskCell4" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell4" class="remindercell"></td>
     </tr>
     <tr>
       <td>10:00 AM</td>
       <td id="taskCell5" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell5" class="remindercell"></td>
     </tr>
     <tr>
       <td>11:00 AM</td>
       <td id="taskCell6" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell6" class="remindercell"></td>
     </tr>
     <tr>
       <td>12:00 PM</td>
       <td id="taskCell7" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell7" class="remindercell"></td>
     </tr>
     <tr>
       <td>1:00 PM</td>
       <td id="taskCell8" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell8" class="remindercell"></td>
     </tr>
     <tr>
       <td>2:00 PM</td>
       <td id="taskCell9" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell9" class="remindercell"></td>
     </tr>
     <tr>
       <td>3:00 PM</td>
       <td id="taskCell10" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell10" class="remindercell"></td>
     </tr>
     <tr>
       <td>4:00 PM</td>
       <td id="taskCell11" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell11" class="remindercell"></td>
     </tr>
     <tr>
       <td>5:00 PM</td>
       <td id="taskCell12" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell12" class="remindercell"></td>
+
     </tr>
     <tr>
       <td>6:00 PM</td>
       <td id="taskCell13" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell13" class="remindercell"></td>
+
     </tr>
     <tr>
       <td>7:00 PM</td>
       <td id="taskCell14" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell14" class="remindercell"></td>
+
     </tr>
     <tr>
       <td>8:00 PM</td>
       <td id="taskCell15" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell15" class="remindercell"></td>
+
     </tr>
     <tr>
       <td>9:00 PM</td>
       <td id="taskCell16" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell16" class="remindercell"></td>
+
     </tr>
     <tr>
       <td>10:00 PM</td>
       <td id="taskCell17" class="taskcell"></td>
-      <td></td>
+      <td id="reminderCell17" class="remindercell"></td>
     </tr>
   </table>
   <script>
@@ -139,7 +144,26 @@
           taskCell.prepend(checkbox);
         }
       });
-
+$.ajax({
+        url: `/getReminders?username=${username}`,
+        type: 'GET',
+        success: function (result) {
+          let whereAt = 1;
+          for (let i = 0; i < result.length; i++) {
+            const reminder = result[i];
+            
+            const startHour = new Date(reminder.startAt).getHours();
+            
+            const reminderCell = $(`#reminderCell${whereAt}`);
+            whereAt = reminder.hours + whereAt;
+            reminderCell.text(`Task about to start: `+reminder.task);
+          }
+          
+        },
+        error: function (error) {
+          console.error(error);
+        }
+      });
 
       $.ajax({
         url: `/getTasks?username=${username}`,
