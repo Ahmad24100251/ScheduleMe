@@ -178,6 +178,7 @@ $.ajax({
 
             for (let j = whereAt; j < whereAt + taskHours && j <= 17; j++) {
               const taskCell = $(`#taskCell${j}`);
+              let remCell = $(`#reminderCell${j}`)
               if (j === whereAt) { // this is the starting cell of the task
                 const checkbox = $('<input type="checkbox">');
                 checkbox.attr('id', `checkbox${i}`);
@@ -185,9 +186,12 @@ $.ajax({
                 taskCell.append(task.task);
                 taskCell.addClass('task-added');
                 taskCell.attr('rowspan', taskHours);
+                remCell.attr('rowspan', taskHours);
+
                 // taskCell.text(task.task);
               } else { // not the starting cell
                 taskCell.remove(); // remove the cell since it's not needed anymore
+                remCell.remove()
               }
             }
             whereAt = whereAt + taskHours
