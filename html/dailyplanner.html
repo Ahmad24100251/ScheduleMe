@@ -18,7 +18,7 @@
       <th>Reminders</th>
       <th>Gratitude Journal<button onclick="redirectToGratitude()">+</button></th>
     </tr>
-   <tr>
+    <tr>
       <td>6:00 AM</td>
       <td id="taskCell1" class="taskcell"></td>
       <td id="reminderCell1" class="remindercell"></td>
@@ -124,83 +124,148 @@
           console.error(error);
         }
       });
-      // Add event listener to all checkboxes with id starting with 'checkbox'
+
+
+
+
+
       $(document).on('change', 'input[id^="checkbox"]', function () {
         const checkboxId = $(this).attr('id');
+        console.log(checkboxId)
         const taskCell = $(this).closest('.taskcell');
         const taskName = taskCell.text().trim();
 
         if ($(this).is(':checked')) {
           // Checkbox is checked, remove it and cross out the task name
           $(this).remove();
-          taskCell.addClass('task-completed');
           taskCell.html(`<s>${taskName}</s>`);
+
+          // Send AJAX request to update checkbox status in the database
+          $.ajax({
+            url: `/updateCheckboxStatus?username=${username}&checkboxId=${checkboxId}&checked=true`,
+            type: 'POST',
+            success: function () {
+              console.log('Checkbox status updated in the database');
+            },
+            error: function (error) {
+              console.error(error);
+            },
+            complete: function () {
+              console.log('complete');
+            }
+          });
         } else {
           // Checkbox is unchecked, restore the task name and add the checkbox back
-          taskCell.removeClass('task-completed');
+
           taskCell.html(taskName);
           const checkbox = $('<input type="checkbox">');
           checkbox.attr('id', checkboxId);
           taskCell.prepend(checkbox);
+
+          // Send AJAX request to update checkbox status in the database
+          $.ajax({
+            url: `/updateCheckboxStatus?username=${username}&checkboxId=${checkboxId}&checked=false`,
+            type: 'POST',
+            success: function () {
+              console.log('Checkbox status updated in the database');
+            },
+            error: function (error) {
+              console.error(error);
+            },
+            complete: function () {
+              console.log('complete');
+            }
+          });
         }
       });
-$.ajax({
+
+
+
+      $.ajax({
         url: `/getReminders?username=${username}`,
         type: 'GET',
         success: function (result) {
           let whereAt = 1;
+
           for (let i = 0; i < result.length; i++) {
             const reminder = result[i];
-            
+
             const startHour = new Date(reminder.startAt).getHours();
-            
+
             const reminderCell = $(`#reminderCell${whereAt}`);
             whereAt = reminder.hours + whereAt;
-            reminderCell.text(`Task about to start: `+reminder.task);
+            reminderCell.text(`Task about to start: ` + reminder.task);
           }
-          
+
         },
         error: function (error) {
           console.error(error);
         }
       });
 
-      $.ajax({
-        url: `/getTasks?username=${username}`,
-        type: 'GET',
-        success: function (result) {
+      async function getTasks() {
+        try {
+          const result = await $.ajax({
+            url: `/getTasks?username=${username}`,
+            type: 'GET'
+          });
           let whereAt = 1;
           for (let i = 0; i < result.length; i++) {
             const task = result[i];
             const taskHours = task.hours;
             const taskStart = new Date(task.startAt).getHours();
             const taskEnd = new Date(task.endAt).getHours();
+            let isChecked = 0;
+            try {
+              const result2 = await $.ajax({
+                url: `/getCheckboxStatuses?username=${username}`,
+                type: 'GET'
+              });
+              const checkboxStatuses = result2;
+              let indexAt = 0;
+              
+              $.each(checkboxStatuses, function (checkboxId, status) {
 
+                if (indexAt == i && status === 'checked') {
+                  isChecked = 1;
+                }
+                indexAt = indexAt + 1
+              });
+            } catch (error) {
+              console.error(error);
+            }
+            console.log('task: ', i, ' check: ', isChecked)
             for (let j = whereAt; j < whereAt + taskHours && j <= 17; j++) {
               const taskCell = $(`#taskCell${j}`);
               let remCell = $(`#reminderCell${j}`)
               if (j === whereAt) { // this is the starting cell of the task
+                if(!isChecked)
+                {
                 const checkbox = $('<input type="checkbox">');
                 checkbox.attr('id', `checkbox${i}`);
                 taskCell.append(checkbox);
                 taskCell.append(task.task);
-                taskCell.addClass('task-added');
+                }
+                else{
+                taskCell.append(`<s>${task.task}</s>`);
+
+                }
                 taskCell.attr('rowspan', taskHours);
                 remCell.attr('rowspan', taskHours);
-
+               
                 // taskCell.text(task.task);
               } else { // not the starting cell
                 taskCell.remove(); // remove the cell since it's not needed anymore
                 remCell.remove()
               }
             }
-            whereAt = whereAt + taskHours
+            whereAt = whereAt + taskHours;
           }
-        },
-        error: function (error) {
+        } catch (error) {
           console.error(error);
         }
-      });
+      }
+      getTasks();
 
 
     });
