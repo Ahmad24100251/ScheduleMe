@@ -52,9 +52,13 @@ const getTasks = require("./getTasks");
 app.use(getTasks);
 const getReminders = require("./getReminders");
 app.use(getReminders)
+const updateCheckboxStatus = require("./updateCheckboxStatus");
+app.use(updateCheckboxStatus);
 
 const delTasks = require("./deleteTasks");
 app.use(delTasks);
+const getCheckboxStatusesRouter = require("./getCheckboxStatuses");
+app.use(getCheckboxStatusesRouter);
 
 app.get("/", (req, res) => {
   res.sendFile(indexHtmlPath + "/html/index.html");
