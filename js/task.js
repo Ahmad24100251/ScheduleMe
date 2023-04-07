@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const taskSchema = new mongoose.Schema({
+  checkboxId: {
+    type: String,
+    required: true
+  }, // Add _id field here
   username: {
     type: String,
     required: true
@@ -32,7 +36,8 @@ const taskSchema = new mongoose.Schema({
   lastReminderSent: {
     type: Date,
     default: null
-  }
+  },
+  completed: { type: Boolean, default: false }
 }, {
   timestamps: true
 });
