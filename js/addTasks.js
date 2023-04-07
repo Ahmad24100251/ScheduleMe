@@ -20,8 +20,9 @@ router.post("/addTasks.html", async (req, res) => {
     const currentMonth = (`0${new Date(currentDate).getUTCMonth() + 1}`).slice(-2);
     const currentDay = (`0${new Date(currentDate).getUTCDate()}`).slice(-2);
     const startAt = taskCount === 0 ? new Date(`${currentYear}-${currentMonth}-${currentDay}T06:00:00.000Z`) : (await Task.findOne({ username: username, taskNumber: taskCount })).endAt;
- 
+    
     const endAt = new Date(startAt.getTime() + hours * 60 * 60 * 1000);
+    const checkId = `checkbox${taskCount}`
     const taskNumber = taskCount + 1; // increment the task count to get the new task number
     const task = new Task({
       username,
@@ -30,7 +31,8 @@ router.post("/addTasks.html", async (req, res) => {
       priority: priority,
       hours: hours,
       startAt: startAt,
-      endAt: endAt
+      endAt: endAt,
+      checkboxId: checkId
     });
 
     await task.save();
