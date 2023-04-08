@@ -13,18 +13,13 @@
   <div class="container">
     <h1>Finance Tracker</h1>
 
-    <table class="accounts">
-      <caption>List of Accounts</caption>
-      <tbody>
-        <tr>
-          <td><button>My Account</button></td>
-        </tr>
-      </tbody>
-    </table>
+    <div id="accountButtons"></div>
 
     <div class="button-group">
       <button onclick="redirectToaddGoal()">Goals</button>
       <button onclick="redirectToaddRecord()">New Record</button>
+      <button onclick="redirectToaddAccount()">Add Account</button>
+      <button onclick="updateAccount()">Update Account</button>
     </div>
 
     <div class="finance-summary">
@@ -33,6 +28,13 @@
     </div>
   </div>
   <script>
+    async function updateAccount() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      const accountName = urlParams.get('account');
+      window.location.href = `/updateAccount.html?username=${username}&account=${accountName}`;
+    }
+
     async function getRecord(username) {
       const response = await fetch(`/getRecord?username=${username}`);
       const data = await response.json();
@@ -45,19 +47,54 @@
       return data;
     }
 
+    async function getAccounts(username) {
+      const response = await fetch(`/getAccounts?username=${username}`);
+      const data = await response.json();
+      return data;
+    }
+
     async function displayFinanceSummary() {
       const urlParams = new URLSearchParams(window.location.search);
       const username = urlParams.get('username');
 
-      const record = await getRecord(username);
-      const goal = await getGoal(username);
-      
-      document.getElementById("record").innerHTML = `Total Spending: Rs ${record.totalSpending}<br><br><br>`;
-      document.getElementById("goal").innerHTML = `Goal: Rs ${goal.goal}`;
-      if (record.totalSpending > goal.goal) {
-      alert(`You have exceeded your finance goal by ${record.totalSpending-goal.goal}. Please be more careful with your spending!`);
+      let record, goal, accounts;
+      try {
+        record = await getRecord(username);
+      } catch (error) {
+        console.error(error);
+        record = { totalSpending: 'undefined' };
+      }
+      try {
+        goal = await getGoal(username);
+      } catch (error) {
+        console.error(error);
+        goal = { goal: 'undefined' };
+      }
+      try {
+        accounts = await getAccounts(username);
+      } catch (error) {
+        console.error(error);
+        accounts = [];
+      }
+
+      document.getElementById("record").innerHTML = `Total Spending: Rs ${record.totalSpending || 'undefined'}<br><br><br>`;
+      document.getElementById("goal").innerHTML = `Goal: Rs ${goal.goal || 'undefined'}`;
+      if (record.totalSpending !== 'undefined' && goal.goal !== 'undefined' && record.totalSpending > goal.goal) {
+        alert(`You have exceeded your finance goal by ${record.totalSpending - goal.goal}. Please be more careful with your spending!`);
+      }
+
+      const accountButtons = document.getElementById("accountButtons");
+      for (let i = 0; i < accounts.length; i++) {
+        const account = accounts[i];
+        const accountButton = document.createElement("button");
+        accountButton.innerText = `${account.accountName} (Rs ${account.balance})`;
+        accountButton.onclick = function () {
+          redirectToAccount(account.accountName);
+        };
+        accountButtons.appendChild(accountButton);
+      }
     }
-    }
+
 
     displayFinanceSummary();
 
@@ -66,10 +103,23 @@
       const username = urlParams.get('username');
       window.location.href = `/addGoal.html?username=${username}`;
     }
+
     function redirectToaddRecord() {
       const urlParams = new URLSearchParams(window.location.search);
       const username = urlParams.get('username');
       window.location.href = `/addRecord.html?username=${username}`;
+    }
+
+    function redirectToaddAccount() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      window.location.href = `/addAccount.html?username=${username}`;
+    }
+
+    function redirectToAccount(accountName) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      window.location.href = `/account.html?username=${username}&account=${accountName}`;
     }
   </script>
 </body>
