@@ -21,7 +21,7 @@
   <div class="buttons">
     <button class="button" id="daily-planner" onclick="redirectToPlanner()">Daily Planner</button>
     <button class="button" id="fitness-tracker" onclick="redirectToFitnessTracker()">Fitness Tracker</button>
-    <button class="button" id="finance-tracker">Finance Tracker</button>
+    <button class="button" id="finance-tracker" onclick="redirectToFinanceTracker()">Finance Tracker</button>
   </div>
 
   <div class="motivationalQuotes"></div>
@@ -47,6 +47,11 @@
         console.log(randomQuote)
         div.textContent = randomQuote;
       });
+    function redirectToFinanceTracker() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      window.location.href = `/financetracker.html?username=${username}`;
+    }
     function redirectToFitnessTracker() {
       const urlParams = new URLSearchParams(window.location.search);
       const username = urlParams.get('username');
