@@ -62,6 +62,12 @@ const addRecord = require("./addRecord");
 app.use(addRecord);
 const getRecordAndGoal = require("./getRecordAndGoal");
 app.use(getRecordAndGoal);
+const addAccount = require("./addAccount");
+app.use(addAccount);
+const getAccounts =   require("./getAccounts");
+app.use(getAccounts);
+const updateAccount =  require("./updateAccount");  
+app.use(updateAccount);
 app.get("/", (req, res) => {
   res.sendFile(indexHtmlPath + "/html/index.html");
 });
