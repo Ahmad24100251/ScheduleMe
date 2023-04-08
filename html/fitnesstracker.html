@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fitness Tracker</title>
+    <link rel="stylesheet" href="css/fitnessTrackerDashboard.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Fitness Tracker</h1>
+      <nav>
+        <ul>
+          <li><a href="#" class="buttonLinks">Food log</a></li>
+          <li><a href="#" class="buttonLinks">Exercise log</a></li>
+          <li>
+            <a
+              href="addFitnessStats.html?username=<%= username %>"
+              class="buttonLinks"
+              >Add Fitness Stats</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="stats">
+        <h2 class="sectionTitle">Stats</h2>
+        <div class="sectionContent">
+          <ul>
+            <li id="weight"></li>
+            <li id="height"></li>
+            <li id="age"></li>
+            <li id="goal"></li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="goal">
+        <h2 class="sectionTitle">Goal</h2>
+        <div class="sectionContent">
+          <p id="goalMessage">Loading goal information...</p>
+        </div>
+      </section>
+
+      <section id="summary">
+        <h2 class="sectionTitle">Daily Summary</h2>
+        <div class="sectionContent">
+          <p>Summary content goes here.</p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get("username");
+
+      fetch(`/getFitnessStats?username=${username}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const { weight, height, age, goal } = data[0];
+          document.getElementById("weight").textContent = `Weight: ${weight} kg`;
+          document.getElementById("height").textContent = `Height: ${height} cm`;
+          document.getElementById("age").textContent = `Age: ${age} years`;
+          document.getElementById("goal").textContent = `Current Goal: ${goal}`;
+          const bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+          const tdee = bmr * 1.3;
+          let goalMessage = "";
+          if (goal === "reduce") {
+            goalMessage = `In order to reduce weight you need to consume ${
+              tdee - 300
+            } calories.`;
+          } else if (goal === "bulk") {
+            goalMessage = `In order to bulk you need to consume ${
+              tdee + 300
+            } calories.`;
+          } else {
+            goalMessage = `In order to maintain your weight you need to consume ${tdee} calories.`;
+          }
+          document.getElementById("goalMessage").textContent = goalMessage;
+        })
+        .catch((error) => console.error(error));
+    </script>
+  </body>
+</html>
