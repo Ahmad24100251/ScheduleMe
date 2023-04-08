@@ -55,7 +55,7 @@
       document.getElementById("record").innerHTML = `Total Spending: Rs ${record.totalSpending}<br><br><br>`;
       document.getElementById("goal").innerHTML = `Goal: Rs ${goal.goal}`;
       if (record.totalSpending > goal.goal) {
-      alert("You have exceeded your finance goal!");
+      alert(`You have exceeded your finance goal by ${record.totalSpending-goal.goal}. Please be more careful with your spending!`);
     }
     }
 
