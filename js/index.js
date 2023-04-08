@@ -36,10 +36,8 @@ app.use(express.static(indexHtmlPath));
 
 const signupRouter = require("./signup");
 app.use(signupRouter);
-
 const loginRouter = require("./login");
 app.use(loginRouter);
-
 const changePasswordRouter = require("./changePassword");
 app.use(changePasswordRouter);
 const addGratitudeRouter = require("./addGratitude");
@@ -54,12 +52,16 @@ const getReminders = require("./getReminders");
 app.use(getReminders)
 const updateCheckboxStatus = require("./updateCheckboxStatus");
 app.use(updateCheckboxStatus);
-
 const delTasks = require("./deleteTasks");
 app.use(delTasks);
 const getCheckboxStatusesRouter = require("./getCheckboxStatuses");
 app.use(getCheckboxStatusesRouter);
-
+const addGoal = require("./addGoal");
+app.use(addGoal);
+const addRecord = require("./addRecord");
+app.use(addRecord);
+const getRecordAndGoal = require("./getRecordAndGoal");
+app.use(getRecordAndGoal);
 app.get("/", (req, res) => {
   res.sendFile(indexHtmlPath + "/html/index.html");
 });

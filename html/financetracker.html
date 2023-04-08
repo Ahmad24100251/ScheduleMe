@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Finance Tracker</title>
-        <link rel="stylesheet" href="css/financetracker.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    </head>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Finance Tracker</title>
+  <link rel="stylesheet" href="css/financetracker.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
 <body>
   <div class="container">
     <h1>Finance Tracker</h1>
-    
+
     <table class="accounts">
       <caption>List of Accounts</caption>
       <tbody>
@@ -19,18 +21,57 @@
         </tr>
       </tbody>
     </table>
-    
+
     <div class="button-group">
       <button onclick="redirectToaddGoal()">Goals</button>
-      <button>New Record</button>
+      <button onclick="redirectToaddRecord()">New Record</button>
+    </div>
+
+    <div class="finance-summary">
+      <span id="record"></span>
+      <span id="goal"></span>
     </div>
   </div>
   <script>
+    async function getRecord(username) {
+      const response = await fetch(`/getRecord?username=${username}`);
+      const data = await response.json();
+      return data;
+    }
+
+    async function getGoal(username) {
+      const response = await fetch(`/getGoal?username=${username}`);
+      const data = await response.json();
+      return data;
+    }
+
+    async function displayFinanceSummary() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+
+      const record = await getRecord(username);
+      const goal = await getGoal(username);
+      
+      document.getElementById("record").innerHTML = `Total Spending: Rs ${record.totalSpending}<br><br><br>`;
+      document.getElementById("goal").innerHTML = `Goal: Rs ${goal.goal}`;
+      if (record.totalSpending > goal.goal) {
+      alert("You have exceeded your finance goal!");
+    }
+    }
+
+    displayFinanceSummary();
+
     function redirectToaddGoal() {
       const urlParams = new URLSearchParams(window.location.search);
       const username = urlParams.get('username');
       window.location.href = `/addGoal.html?username=${username}`;
     }
+    function redirectToaddRecord() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      window.location.href = `/addRecord.html?username=${username}`;
+    }
   </script>
 </body>
+
 </html>
