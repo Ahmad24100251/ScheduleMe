@@ -21,9 +21,16 @@
     </table>
     
     <div class="button-group">
-      <button>Budget and Goals</button>
+      <button onclick="redirectToaddGoal()">Goals</button>
       <button>New Record</button>
     </div>
   </div>
+  <script>
+    function redirectToaddGoal() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      window.location.href = `/addGoal.html?username=${username}`;
+    }
+  </script>
 </body>
 </html>
