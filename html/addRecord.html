@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,11 +8,18 @@
     <link rel="stylesheet" href="css/addRecord.css">
     <title>Add spendings</title>
 </head>
+
 <body>
     <div class="container">
         <div class="card">
             <h1>Enter spending</h1>
             <form action="#" method="POST">
+                <div class="form-group">
+                    <select id="account" name="account" required>
+                        <option value="" selected disabled>Select an account</option>
+                        <!-- Use JavaScript to dynamically populate the dropdown menu with account names -->
+                    </select>
+                </div>
                 <div class="form-group">
                     <input type="number" id="spending" name="spending" placeholder="Enter your spending" required>
                 </div>
@@ -19,5 +27,24 @@
             </form>
         </div>
     </div>
+    <script>
+        // Use JavaScript to dynamically populate the dropdown menu with account names
+        async function populateDropdown() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('username');
+            const response = await fetch(`/getAccounts?username=${username}`);
+            const data = await response.json();
+            const accountDropdown = document.getElementById("account");
+            for (let i = 0; i < data.length; i++) {
+                const account = data[i];
+                const option = document.createElement("option");
+                option.value = account.accountName;
+                option.text = account.accountName;
+                accountDropdown.add(option);
+            }
+        }
+        populateDropdown();
+    </script>
 </body>
+
 </html>
