@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Stats</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=PT+Sans");
+        
+        body {
+            background: #141414;
+            font-family: "PT Sans", sans-serif;
+        }
+        
+        .container {
+            width: 30%;
+            margin: 0 auto;
+            margin-top: 150px;
+            text-align: center;
+        }
+        
+        .card {
+            border: 0.4rem solid #525050;
+            background: #fff;
+            padding: 20px;
+        }
+        
+        h1 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            color: #000000;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #000000;
+            text-align: left;
+        }
+        
+        input[type="number"],
+        select {
+            font-size: 15px;
+            width: 70%;
+            padding: 10px;
+            background-color: #f8f9fa;
+            color: #000000;
+            border-radius: 5px;
+            border: 1px solid #626262;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        button[type="submit"] {
+            display: block;
+            padding: 0.6rem 1.2rem;
+            background-color: #3b3b3b;
+            color: #fff;
+            margin: 0 auto;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            border: 1px solid #3b3b3b;
+            border-radius: 4px;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #7c7c7c;
+            border: 1px solid #7c7c7c;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1>Add Fitness Stats</h1>
+        <form action="#" method="POST">
+            <div class="form-group">
+                <input type="number" id="current-weight" name="current-weight" placeholder="Enter your current weight (in kg)" required>
+            </div>
+            <div class="form-group">
+                <input type="number" id="height" name="height" placeholder="Enter your height (in cm)" required>
+            </div>
+            <div class="form-group">
+                <input type="number" id="age" name="age" placeholder="Enter your age" required>
+            </div>
+            <div class="form-group">
+                <select id="goal" name="goal">
+                    <option value="reduce">Reduce weight</option>
+                    <option value="maintain">Maintain weight</option>
+                    <option value="bulk">Bulk up</option>
+                </select>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
