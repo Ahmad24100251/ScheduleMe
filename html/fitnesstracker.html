@@ -129,7 +129,7 @@
         console.error(error);
       });
 
-    fetch(`/getExerciseLogs?username=${username}`)
+    fetch(`/getExerciseLogs.html?username=${username}`)
       .then((response) => response.json())
       .then((data) => {
         const exerciseLogsList = document.getElementById("exerciseLogs");
