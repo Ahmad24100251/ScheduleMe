@@ -72,6 +72,16 @@ const addFitnessStats = require("./addFitnessStats")
 app.use(addFitnessStats)
 const getFitnessStats = require("./getFitnessStats")
 app.use(getFitnessStats)
+const addExercise = require("./addExercise")
+app.use(addExercise)
+const getExercise = require("./getExerciseLogs")
+app.use(getExercise)
+const addFood = require("./addFood")
+app.use(addFood)
+const getFood = require("./getFood")
+app.use(getFood)
+
+
 app.get("/", (req, res) => {
   res.sendFile(indexHtmlPath + "/html/index.html");
 });
