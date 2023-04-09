@@ -20,7 +20,7 @@ router.post('/addFitnessStats.html', async (req, res) => {
     });
 
     await fitnessStats.save();
-    res.redirect(`/fitnessTracker.html?username=${username}`);
+    res.redirect(`/fitnesstracker.html?username=${username}`);
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal server error');
