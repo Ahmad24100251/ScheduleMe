@@ -20,7 +20,17 @@ body {
 
 h1 {
   margin-bottom: 20px;
-  text-align: center;
+  display: flex; 
+  align-items: center; 
+  border-bottom: 1px solid white; /* white border */
+}
+
+.title {
+  flex: 1; 
+}
+
+.button-group {
+  margin-left: auto; 
 }
 
 table {
@@ -78,7 +88,7 @@ button:last-child {
 
 button:hover,
 td button:hover {
-  background-color: #3e8e41;
+  background-color: #808080;
 }
 
 .accounts {
