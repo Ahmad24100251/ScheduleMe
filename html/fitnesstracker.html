@@ -28,7 +28,7 @@
       <section id="stats">
         <h2 class="sectionTitle">Stats</h2>
         <div class="sectionContent">
-          <ul>
+          <ul style="color: black">
             <li id="weight"></li>
             <li id="height"></li>
             <li id="age"></li>
@@ -37,7 +37,7 @@
         </div>
       </section>
 
-      <section id="goal">
+      <section id="goal" style="color: black">
         <h2 class="sectionTitle">Goal</h2>
         <div class="sectionContent">
           <p id="goalMessage">Loading goal information...</p>
@@ -65,7 +65,8 @@
           document.getElementById("age").textContent = `Age: ${age} years`;
           document.getElementById("goal").textContent = `Current Goal: ${goal}`;
           const bmr = 10 * weight + 6.25 * height - 5 * age - 161;
-          const tdee = bmr * 1.3;
+          let tdee = bmr * 1.3;
+          tdee = Math.round(tdee);
           let goalMessage = "";
           if (goal === "reduce") {
             goalMessage = `In order to reduce weight you need to consume ${
