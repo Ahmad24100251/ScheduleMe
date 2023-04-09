@@ -24,7 +24,7 @@ router.post("/updateAccount.html", async (req, res) => {
         accountToUpdate.balance = newBalance;
         await accountToUpdate.save();
 
-        res.redirect(`/financeTracker.html?username=${username}`);
+        res.redirect(`/financetracker.html?username=${username}`);
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server error");
