@@ -17,7 +17,7 @@ router.post("/fitnessTrackerFoodLog.html", async (req, res) => {
     });
 
     await food.save();
-    res.redirect(`/fitnessTrackerFoodLog.html?username=${username}`);
+    res.redirect(`/fitnesstracker.html?username=${username}`);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error");
