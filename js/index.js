@@ -68,6 +68,10 @@ const getAccounts =   require("./getAccounts");
 app.use(getAccounts);
 const updateAccount =  require("./updateAccount");  
 app.use(updateAccount);
+const addFitnessStats = require("./addFitnessStats")
+app.use(addFitnessStats)
+const getFitnessStats = require("./getFitnessStats")
+app.use(getFitnessStats)
 app.get("/", (req, res) => {
   res.sendFile(indexHtmlPath + "/html/index.html");
 });
