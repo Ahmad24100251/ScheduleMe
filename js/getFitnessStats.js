@@ -6,7 +6,8 @@ const FitnessStats = require('./fitnessStats');
 router.get('/getFitnessStats', async (req, res) => {
   const username = req.query.username;
   try {
-    const fitnessStats = await FitnessStats.find({ username });
+    const fitnessStats = await FitnessStats.find({ username }).sort({ createdAt: -1 }).limit(1);
+
     res.send(fitnessStats);
   } catch (error) {
     console.error(error);
