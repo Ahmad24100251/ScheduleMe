@@ -36,7 +36,7 @@ router.post("/addRecord.html", async (req, res) => {
       await newRecord.save();
     }
 
-    res.redirect(`/financeTracker.html?username=${username}`);
+    res.redirect(`/financetracker.html?username=${username}`);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error");
