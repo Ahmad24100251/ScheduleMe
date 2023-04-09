@@ -19,7 +19,7 @@ router.post("/signup.html", async (req, res) => {
     });
 
     await newUser.save();
-    res.redirect('/signup.html');
+    res.redirect('/login.html');
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error");

@@ -4,7 +4,8 @@ const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
-const urlDB = "mongodb://127.0.0.1:27017/testdb";
+const urlDB = "mongodb+srv://doadmin:0eSIaD6U2u39814G@testclus-46717d43.mongo.ondigitalocean.com/admin?retryWrites=true&w=majority";
+
 
 // Connect to the MongoDB database
 mongoose.connect(urlDB, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -68,6 +69,20 @@ const getAccounts =   require("./getAccounts");
 app.use(getAccounts);
 const updateAccount =  require("./updateAccount");  
 app.use(updateAccount);
+const addFitnessStats = require("./addFitnessStats")
+app.use(addFitnessStats)
+const getFitnessStats = require("./getFitnessStats")
+app.use(getFitnessStats)
+const addExercise = require("./addExercise")
+app.use(addExercise)
+const getExercise = require("./getExerciseLogs")
+app.use(getExercise)
+const addFood = require("./addFood")
+app.use(addFood)
+const getFood = require("./getFood")
+app.use(getFood)
+
+
 app.get("/", (req, res) => {
   res.sendFile(indexHtmlPath + "/html/index.html");
 });
