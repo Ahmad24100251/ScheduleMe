@@ -12,6 +12,7 @@
 <body>
   <div class="container">
     <h1>Finance Tracker</h1>
+    <button class="button-goback" id="go back" onclick="redirectToWelcome()">Go Back</button>
 
     <div id="accountButtons"></div>
 
@@ -121,6 +122,13 @@
       const username = urlParams.get('username');
       window.location.href = `/account.html?username=${username}&account=${accountName}`;
     }
+
+    function redirectToWelcome() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      window.location.href = `/welcomeUser.html?username=${username}`;
+    }
+
   </script>
 </body>
 
