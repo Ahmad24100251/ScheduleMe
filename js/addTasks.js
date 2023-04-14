@@ -11,9 +11,7 @@ router.post("/addTasks.html", async (req, res) => {
     // get the current task count for the user
     const taskCount = await Task.countDocuments({ username: username });
     // check if the user has reached the task limit
-    if (taskCount >= 17) {
-      return res.status(400).send("Task limit reached");
-    }
+
     // calculate the start and end times for the new task
     const currentDate = new Date().toLocaleString("en-US", { timeZone: "Asia/Karachi" });
     const currentYear = new Date(currentDate).getUTCFullYear();
@@ -22,6 +20,12 @@ router.post("/addTasks.html", async (req, res) => {
     const startAt = taskCount === 0 ? new Date(`${currentYear}-${currentMonth}-${currentDay}T06:00:00.000Z`) : (await Task.findOne({ username: username, taskNumber: taskCount })).endAt;
     
     const endAt = new Date(startAt.getTime() + hours * 60 * 60 * 1000);
+    // add conditional statement to check if end time exceeds 10 pm
+    console.log(endAt.getUTCHours())
+    if (endAt.getUTCHours() > 22 || endAt.getUTCHours() < 6) {
+      return res.status(400).send("Invalid schedule. Please try again.");
+    }
+
     const checkId = `checkbox${taskCount}`
     const taskNumber = taskCount + 1; // increment the task count to get the new task number
     const task = new Task({
