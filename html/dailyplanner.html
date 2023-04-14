@@ -11,6 +11,7 @@
 
 <body>
   <h1>Daily Planner</h1>
+  <button class="button-goback" id="go back" onclick="redirectToWelcome()">Go Back</button>
   <table>
     <tr>
       <th>Time</th>
@@ -280,6 +281,13 @@
       const username = urlParams.get('username');
       window.location.href = `/addGratitude.html?username=${username}`;
     }
+    function redirectToWelcome() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      window.location.href = `/welcomeUser.html?username=${username}`;
+    }
+
+
   </script>
 
 </html>
