@@ -29,16 +29,27 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 10px;
     background-color: #000000;
+}
+
+nav {
+    margin-left: auto;
 }
 
 nav ul {
     display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 nav li {
-    margin-right: 1rem;
+    margin-left: 20px;
+}
+
+nav li:first-child {
+    margin-left: 0;
 }
 
 /* Main styles */
@@ -67,3 +78,18 @@ main {
 #stats .sectionContent ul li {
     margin-bottom: 0.5rem;
 }
+
+.button-goback{
+    position: absolute;
+    top:25px;
+    left:10px;
+    border-radius: 6px;
+    border: none;
+    background-color: #525050;
+    color:white;
+    font-family: 'Poppins',sans-serif;
+    font-size: 11px;
+    height: 24px;
+    width:116px;
+}
+
