@@ -11,6 +11,9 @@
 <body>
   <header>
     <h1>Fitness Tracker</h1>
+    <button class="button-goback" id="go back" onclick="redirectToWelcome()">Go Back</button>
+
+
     <nav>
       <ul>
         <li><a href="fitnessTrackerFoodLog.html" class="buttonLinks">Food log</a></li>
@@ -74,11 +77,9 @@
         tdee = Math.round(tdee);
         let goalMessage = "";
         if (goal === "reduce") {
-          tdee = tdee - 300;
-          goalMessage = `In order to reduce weight you need to consume ${tdee} calories.`;
+          goalMessage = `In order to reduce weight you need to consume ${tdee - 300} calories.`;
         } else if (goal === "bulk") {
-          tdee = tdee + 300;
-          goalMessage = `In order to bulk you need to consume ${tdee} calories.`;
+          goalMessage = `In order to bulk you need to consume ${tdee + 300} calories.`;
         } else {
           goalMessage = `In order to maintain your weight you need to consume ${tdee} calories.`;
         }
@@ -90,10 +91,6 @@
           .then((response) => response.json())
           .then((data) => {
             const foodEntriesList = document.getElementById("foodEntries");
-            if(data.length === 0) {
-              foodEntriesList.textContent = "No food entries yet";
-              totalCalories = 0;
-            }
             data.forEach((entry) => {
               const li = document.createElement("li");
               const text = document.createTextNode(`${entry.mealType} - ${entry.calories} calories`);
@@ -139,9 +136,6 @@
       .then((response) => response.json())
       .then((data) => {
         const exerciseLogsList = document.getElementById("exerciseLogs");
-        if(data.length === 0) {
-          exerciseLogsList.textContent = "No exercise logs yet";
-        }
         data.forEach((entry) => {
           const li = document.createElement("li");
           const text = document.createTextNode(`${entry.exerciseName} - ${entry.exerciseSets} Sets - ${entry.exerciseReps} Reps`);
@@ -152,6 +146,14 @@
       .catch((error) => {
         console.error(error);
       });
+
+
+      function redirectToWelcome() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      window.location.href = `/welcomeUser.html?username=${username}`;
+      }
+
   </script>
 </body>
 
