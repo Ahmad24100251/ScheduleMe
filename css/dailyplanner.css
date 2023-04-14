@@ -47,3 +47,17 @@ th {
 input[type="checkbox"] {
   float: right;
 }
+
+.button-goback{
+  position: absolute;
+  top:47px;
+  left:10px;
+  border-radius: 6px;
+  border: none;
+  background-color: #525050;
+  color:white;
+  font-family: 'Poppins',sans-serif;
+  font-size: 11px;
+  height: 24px;
+  width:116px;
+}
