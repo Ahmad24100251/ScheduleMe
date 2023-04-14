@@ -21,7 +21,7 @@ router.post("/addTasks.html", async (req, res) => {
     
     const endAt = new Date(startAt.getTime() + hours * 60 * 60 * 1000);
     // add conditional statement to check if end time exceeds 10 pm
-    console.log(endAt.getUTCHours())
+
     if (endAt.getUTCHours() > 22 || endAt.getUTCHours() < 6) {
       return res.status(400).send("Invalid schedule. Please try again.");
     }
