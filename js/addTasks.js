@@ -6,7 +6,7 @@ router.post("/addTasks.html", async (req, res) => {
   try {
     const username = req.session.username;
     const taskName = req.body.task;
-    const priority = req.body.priority;
+
     const hours = req.body.hours;
     // get the current task count for the user
     const taskCount = await Task.countDocuments({ username: username });
@@ -32,7 +32,7 @@ router.post("/addTasks.html", async (req, res) => {
       username,
       taskNumber,
       task: taskName,
-      priority: priority,
+
       hours: hours,
       startAt: startAt,
       endAt: endAt,

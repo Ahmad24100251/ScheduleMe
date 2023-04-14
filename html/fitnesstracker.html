@@ -12,14 +12,13 @@
   <header>
     <h1>Fitness Tracker</h1>
     <button class="button-goback" id="go back" onclick="redirectToWelcome()">Go Back</button>
-
-
     <nav>
       <ul>
-        <li><a href="fitnessTrackerFoodLog.html" class="buttonLinks">Food log</a></li>
-        <li><a href="exerciseLog.html" class="buttonLinks">Exercise log</a></li>
+        
+        <li><a href="fitnessTrackerFoodLog.html" class="button-foodlog">Food log</a></li>
+        <li><a href="exerciseLog.html" class="button-exerciselog">Exercise log</a></li>
         <li>
-          <a href="addFitnessStats.html" class="buttonLinks">Add Fitness Stats</a>
+          <a href="addFitnessStats.html" class="button-addstats">Add Fitness Stats</a>
         </li>
       </ul>
     </nav>
@@ -77,9 +76,11 @@
         tdee = Math.round(tdee);
         let goalMessage = "";
         if (goal === "reduce") {
-          goalMessage = `In order to reduce weight you need to consume ${tdee - 300} calories.`;
+          tdee -= 300;
+          goalMessage = `In order to reduce weight you need to consume ${tdee } calories.`;
         } else if (goal === "bulk") {
-          goalMessage = `In order to bulk you need to consume ${tdee + 300} calories.`;
+          tdee += 300;
+          goalMessage = `In order to bulk you need to consume ${tdee} calories.`;
         } else {
           goalMessage = `In order to maintain your weight you need to consume ${tdee} calories.`;
         }

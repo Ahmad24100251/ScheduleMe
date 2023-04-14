@@ -31,6 +31,9 @@ header {
     align-items: center;
     padding: 10px;
     background-color: #000000;
+    flex-wrap: wrap;
+    margin-left: 44vw;
+
 }
 
 nav {
@@ -45,7 +48,8 @@ nav ul {
 }
 
 nav li {
-    margin-left: 20px;
+
+    margin-left: 40px
 }
 
 nav li:first-child {
@@ -79,17 +83,49 @@ main {
     margin-bottom: 0.5rem;
 }
 
-.button-goback{
-    position: absolute;
-    top:25px;
-    left:10px;
-    border-radius: 6px;
-    border: none;
+/* .button-goback{
+    position: relative;
+    top: 25px;
+    left: 10px;
+    border-radius: 12px;
+    border: 1px solid #525050;
     background-color: #525050;
-    color:white;
-    font-family: 'Poppins',sans-serif;
-    font-size: 11px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
     height: 24px;
-    width:116px;
+    width: 116px;
+} */
+
+.button-foodlog,
+.button-exerciselog,
+.button-addstats {
+    position: relative;
+    top: 25px;
+    left: 10px;
+    border-radius: 200px;
+    border: 10px solid #525050;
+    background-color: #525050;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    height: 24px;
+    width: 116px;
 }
 
+.button-goback{
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    border-radius: 20px;
+    border: 2px solid #525050;
+    background-color: #525050;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    height: px;
+    width: 150px;
+    cursor: pointer;
+    padding: 1px 28px;
+
+}

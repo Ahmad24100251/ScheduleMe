@@ -13,10 +13,7 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  priority: {
-    type: Number,
-    required: true
-  },
+ 
   hours: {
     type: Number,
     required: true
